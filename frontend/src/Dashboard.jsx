@@ -173,6 +173,7 @@ const Dashboard = () => {
       <input type="text" placeholder="User Address" value={selectedUserAddress} onChange={(e) => setSelectedUserAddress(e.target.value)} />
       <button onClick={issueTicket} disabled={loading}>Issue Ticket</button>
       <br />
+      <br />
       <h2>Messages</h2>
       <p>{message}</p>
     </div>
