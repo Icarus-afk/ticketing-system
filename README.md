@@ -57,3 +57,23 @@ The system will leverage blockchain technology to create a secure and transparen
 - Integration with secondary market functionalities for ticket resale.
 - Implementation of a decentralized event discovery platform.
 - Exploration of integrating with ticketing peripherals (e.g., scanners).
+
+<br>
+<br> 
+
+___
+
+# System Diagram
+
+![System Diagram](sysinfo/system.png)
+<br>
+<br>
+
+
+# Smart Contract
+![Smart Contract](sysinfo/sc.png)
+<br>
+<br>
+
+# Dataflow
+![Data Flow](sysinfo/dataflow.png)
