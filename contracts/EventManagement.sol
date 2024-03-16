@@ -23,14 +23,28 @@ contract EventManagement {
 
     // Modifier to check if the caller is the event organizer
     modifier onlyOrganizer(uint256 _eventId) {
-        require(msg.sender == events[_eventId].organizer, "Only event organizer can perform this action");
+        require(msg.sender == events[_eventId].organizer, "Caller is not event organizer");
         _;
     }
 
-    // Function to create a new event
+    // Function to create an event
     function createEvent(string memory _name, uint256 _date, uint256 _time, uint256 _price, uint256 _totalTickets) public {
-        events.push(Event(_name, _date, _time, _price, _totalTickets, msg.sender));
+        Event memory newEvent = Event(_name, _date, _time, _price, _totalTickets, msg.sender);
+        events.push(newEvent);
         emit EventCreated(events.length - 1, _name, _date, _time, _price, _totalTickets);
+    }
+
+    // Function to buy tickets for an event
+    function buyTicket(uint256 _eventId, uint256 _tickets) public payable {
+        require(msg.value >= events[_eventId].price * _tickets, "Not enough Ether provided.");
+        require(events[_eventId].totalTickets >= _tickets, "Not enough tickets available.");
+        ticketsSold[_eventId][msg.sender] += _tickets;
+        events[_eventId].totalTickets -= _tickets;
+    }
+
+    // Function to check the number of tickets a user has for a specific event
+    function checkTickets(uint256 _eventId) public view returns (uint256) {
+        return ticketsSold[_eventId][msg.sender];
     }
 
     // Function to get the total number of events
@@ -38,13 +52,8 @@ contract EventManagement {
         return events.length;
     }
 
-    // Function to get the total number of tickets available for an event
+    // Function to get the total number of tickets for a specific event
     function getTotalTickets(uint256 _eventId) public view returns (uint256) {
         return events[_eventId].totalTickets;
-    }
-
-    // Function to increment tickets sold for a specific event and user
-    function incrementTicketsSold(uint256 _eventId, address _user) external {
-        ticketsSold[_eventId][_user]++;
     }
 }
