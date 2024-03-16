@@ -77,3 +77,32 @@ ___
 
 # Dataflow
 ![Data Flow](sysinfo/dataflow.png)
+
+
+## Smart Contracts
+
+The system uses two main smart contracts: `EventManagement` and `Ticket`.
+
+### EventManagement Contract
+
+The `EventManagement` contract is responsible for managing events and tickets. It provides the following functionalities:
+
+- `createEvent`: Allows the contract owner to create a new event with a name, date, time, ticket price, and total number of tickets.
+- `buyTicket`: Allows users to buy tickets for a specific event. It checks if the user has sent enough Ether and if there are enough tickets available.
+- `checkTickets`: Allows users to check how many tickets they have bought for a specific event.
+- `getTotalEvents`: Returns the total number of events.
+- `getTotalTickets`: Returns the total number of tickets for a specific event.
+- `updateEvent`: Allows the event organizer to update the details of an event.
+- `deleteEvent`: Allows the event organizer to delete an event.
+- `getEventDetails`: Returns the details of a specific event.
+- `incrementTicketsSold`: Increments the number of tickets sold for a specific event to a specific address.
+
+### Ticket Contract
+
+The `Ticket` contract is responsible for managing ticket ownership. It provides the following functionalities:
+
+- `issueTicket`: Allows the contract owner to issue a ticket to a specific address for a specific event. It checks if the address already has a ticket for the event and if there are enough tickets available.
+- `transferTicket`: Allows a ticket owner to transfer their ticket to another address.
+- `getTicketDetails`: Returns whether a specific address has a ticket for a specific event.
+
+The `Ticket` contract uses the `EventManagement` contract to check the details of events and tickets.
