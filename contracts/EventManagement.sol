@@ -2,7 +2,6 @@
 pragma solidity ^0.8.0;
 
 contract EventManagement {
-    // Define event struct
     struct Event {
         string name;
         uint256 date;
@@ -12,13 +11,10 @@ contract EventManagement {
         address organizer;
     }
 
-    // Array to store events
     Event[] public events;
 
-    // Mapping to store tickets sold per user for each event
     mapping(uint256 => mapping(address => uint256)) public ticketsSold;
 
-    // Event creation event
     event EventCreated(
         uint256 indexed eventId,
         string name,
@@ -28,7 +24,6 @@ contract EventManagement {
         uint256 totalTickets
     );
 
-    // Modifier to check if the caller is the event organizer
     modifier onlyOrganizer(uint256 _eventId) {
         require(
             msg.sender == events[_eventId].organizer,
@@ -37,7 +32,6 @@ contract EventManagement {
         _;
     }
 
-    // Function to create an event
     function createEvent(
         string memory _name,
         uint256 _date,
@@ -64,7 +58,6 @@ contract EventManagement {
         );
     }
 
-    // Function to buy tickets for an event
     function buyTicket(uint256 _eventId, uint256 _tickets) public payable {
         require(
             msg.value >= events[_eventId].price * _tickets,
@@ -78,18 +71,64 @@ contract EventManagement {
         events[_eventId].totalTickets -= _tickets;
     }
 
-    // Function to check the number of tickets a user has for a specific event
     function checkTickets(uint256 _eventId) public view returns (uint256) {
         return ticketsSold[_eventId][msg.sender];
     }
 
-    // Function to get the total number of events
+    function getTotalEvents() public view returns (uint256) {
+        return events.length;
+    }
+
     function getTotalTickets(uint256 _eventId) public view returns (uint256) {
         return events[_eventId].totalTickets;
     }
 
-    // Function to get the total number of tickets for a specific event
-    function getTotalTickets(uint256 _eventId) public view returns (uint256) {
-        return events[_eventId].totalTickets;
+    function updateEvent(
+        uint256 _eventId,
+        string memory _name,
+        uint256 _date,
+        uint256 _time,
+        uint256 _price,
+        uint256 _totalTickets
+    ) public onlyOrganizer(_eventId) {
+        Event storage myEvent = events[_eventId];
+        myEvent.name = _name;
+        myEvent.date = _date;
+        myEvent.time = _time;
+        myEvent.price = _price;
+        myEvent.totalTickets = _totalTickets;
+    }
+
+    function deleteEvent(uint256 _eventId) public onlyOrganizer(_eventId) {
+        delete events[_eventId];
+    }
+
+    function getEventDetails(
+        uint256 _eventId
+    )
+        public
+        view
+        returns (
+            string memory name,
+            uint256 date,
+            uint256 time,
+            uint256 price,
+            uint256 totalTickets,
+            address organizer
+        )
+    {
+        Event memory myEvent = events[_eventId];
+        return (
+            myEvent.name,
+            myEvent.date,
+            myEvent.time,
+            myEvent.price,
+            myEvent.totalTickets,
+            myEvent.organizer
+        );
+    }
+    // Function to increment the number of tickets sold for a specific event to a specific address
+    function incrementTicketsSold(uint256 _eventId, address _to) public {
+        ticketsSold[_eventId][_to]++;
     }
 }
