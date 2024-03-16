@@ -79,7 +79,7 @@ ___
 ![Data Flow](sysinfo/dataflow.png)
 
 
-## Smart Contracts
+# Smart Contracts
 
 The system uses two main smart contracts: `EventManagement` and `Ticket`.
 
