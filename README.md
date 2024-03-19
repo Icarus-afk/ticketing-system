@@ -111,5 +111,5 @@ The `Ticket` contract uses the `EventManagement` contract to check the details o
 ___
 
 # Extended System Architecture
-![Smart Contract](sysinfo/system_arch.svg)
+![Extended System Architecture](sysinfo/system_arch.png)
 ___
