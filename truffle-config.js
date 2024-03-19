@@ -102,7 +102,7 @@ module.exports = {
       network_id: "*",
       gas: 6721975,
       gasPrice: 20000000000,
-      accounts: ["0xa4f892219e415a6a4ea4b8a6e393313ef04e6202b3bbbea37f34e30eba3e82c9"]
+      accounts: ["0xa4f892219e415a6a4ea4b8a6e393313ef04e6202b3bbbea37f34e30eba3e82c9truf"]
     }
   },
 
