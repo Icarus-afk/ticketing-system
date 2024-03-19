@@ -106,3 +106,10 @@ The `Ticket` contract is responsible for managing ticket ownership. It provides 
 - `getTicketDetails`: Returns whether a specific address has a ticket for a specific event.
 
 The `Ticket` contract uses the `EventManagement` contract to check the details of events and tickets.
+
+
+___
+
+# Extended System Architecture
+![Smart Contract](sysinfo/system_arch.svg)
+___
