@@ -42,7 +42,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -66,7 +67,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -126,7 +128,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"contract EventManagement\",\"name\":\"_eventManagement\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"_to\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"_eventId\",\"type\":\"uint256\"}],\"name\":\"TicketIssued\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"eventManagement\",\"outputs\":[{\"internalType\":\"contract EventManagement\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_eventId\",\"type\":\"uint256\"}],\"name\":\"getTicketDetails\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"hasTicket\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_eventId\",\"type\":\"uint256\"}],\"name\":\"issueTicket\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"tickets\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_eventId\",\"type\":\"uint256\"}],\"name\":\"transferTicket\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/Ticket.sol\":\"Ticket\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/EventManagement.sol\":{\"keccak256\":\"0x881eabe55fa272a4ec10f05ad77dab1f7c02941f92465ff503fa24e8788a014b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://cc6762977fa7e2c2750e5a69d583a54d3ea7436cbdbf4a3e45299b4f31469380\",\"dweb:/ipfs/QmNqmPcZoz4ub6AdGDBkvZURkLfrhfmx9YD3x9RmJNiPTD\"]},\"project:/contracts/Ticket.sol\":{\"keccak256\":\"0x7da42668c0d6feaf788051545174fbe29d1e2d3828e12b37fd43c75c59b11d93\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ce1a1d5b51b931276bf07e5acd23f06eae18c158e3b01877f2762664c89c0069\",\"dweb:/ipfs/Qmbi1hpAYwa81p7T4nFpCsMmeYMhRXAjpLHGPY8yqctWKt\"]}},\"version\":1}",
@@ -6444,9 +6447,17 @@
     "name": "solc",
     "version": "0.8.17+commit.8df45f5f.Emscripten.clang"
   },
-  "networks": {},
+  "networks": {
+    "5777": {
+      "events": {},
+      "links": {},
+      "address": "0x6BaD0EDF139ed6249F787862a11Dc2e3483aead0",
+      "transactionHash": "0x6cab7c916c4caf5b1403514543a26aa92a3285f8e2fc5bf616c9bc2fad3893fd"
+    }
+  },
   "schemaVersion": "3.4.16",
-  "updatedAt": "2024-03-16T16:44:29.877Z",
+  "updatedAt": "2024-03-19T05:21:07.569Z",
+  "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
     "methods": {},
