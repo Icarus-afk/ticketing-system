@@ -3,12 +3,17 @@ import bodyParser from 'body-parser';
 import mongoose  from 'mongoose';
 import cors from 'cors';
 import userRoutes from './routes/users.js';
+// import logger from './middlewares/logger.js';
+// import errorHandler from './middlewares/errorHandler.js';
 
 import dotenv from 'dotenv'
 dotenv.config()
 
 
 const app = express(); //initialize express instance
+
+// app.use(logger);
+// app.use(errorHandler);
 
 // setting up body parser
 app.use(bodyParser.json({ limit: "30mb", extended: true }))
