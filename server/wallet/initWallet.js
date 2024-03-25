@@ -1,4 +1,15 @@
 import { randomBytes, createCipheriv } from 'crypto';
+import { Wallet } from 'ethers'
+import dotenv from 'dotenv'
+import walletSchema from '../models/wallet.js'
+
+dotenv.config()
+
+const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY
+
+function handleError(error) {
+  console.error(error);
+}
 
 export const createWallet = async (userId) => {
   try {
@@ -23,7 +34,7 @@ export const createWallet = async (userId) => {
     encryptedPrivateKey += cipher.final('hex');
 
     // Save wallet details in the Wallet collection
-    const newWallet = new WalletModel({
+    const newWallet = new walletSchema({
       address: address,
       privateKey: encryptedPrivateKey,
       publicKey: publicKey,
