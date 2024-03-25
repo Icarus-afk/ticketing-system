@@ -2,6 +2,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { mongoose } from "mongoose";
 import UserModel from "../models/user.js";
+import { createWallet } from "../wallet/initWallet.js";
 
 const secret = 'test';
 
@@ -37,14 +38,22 @@ export const signup = async (req, res) => {
     if (oldUser) return res.status(400).json({ code: 400, success: false, message: "User already exists" });
 
     const hashedPassword = await bcrypt.hash(password, 12);
+    try {
+      const result = await UserModel.create({ email, password: hashedPassword, name: `${firstName} ${lastName}` });
+      const wallet = await createWallet(result._id);
+      console.log('Wallet created:', wallet);
 
-    const result = await UserModel.create({ email, password: hashedPassword, name: `${firstName} ${lastName}` });
+      const token = jwt.sign({ email: result.email, id: result._id }, secret, { expiresIn: "1h" });
 
-    const token = jwt.sign({ email: result.email, id: result._id }, secret, { expiresIn: "1h" });
+      return res.status(201).json({ code: 201, success: true, message: "User successfully created", data: { result, token, wallet } });
+    } catch (error) {
+      console.error('Error creating wallet:', error);
+      throw error; // Rethrow the error to be caught by the outer catch block
+    }
 
-    res.status(201).json({ code: 201, success: true, message: "User successfully created", data: { result, token } });
   } catch (error) {
-    res.status(500).json({ code: 500, success: false, message: "Something went wrong" });
+    console.error('Error in signup:', error);
+    return res.status(500).json({ code: 500, success: false, message: "Something went wrong" });
   }
 };
 
@@ -68,7 +77,7 @@ export const updateUser = async (req, res) => {
 
 export const deleteUser = async (req, res) => {
   const { id } = req.params;
-  console.log('ID:', id); 
+  console.log('ID:', id);
 
   if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).json({ code: 404, success: false, message: `No user with id: ${id}` });
 
@@ -77,12 +86,12 @@ export const deleteUser = async (req, res) => {
 
     if (!user) {
       // If no user was deleted, send a 404 response
-      return res.status(404).json({ code: 404, success: false, message: `No user found` });
+      return res.status(404).json({ code: 404, success: false, message: `user not found` });
     }
 
     res.json({ code: 200, success: true, message: "User deleted successfully." });
   } catch (error) {
-    console.error(error); 
+    console.error(error);
     res.status(500).json({ code: 500, success: false, message: "Something went wrong" });
   }
 };
