@@ -27,7 +27,6 @@ export const createWallet = async (userId) => {
     const address = wallet.address;
     const publicKey = wallet.publicKey;
 
-    console.log("Wallet Generated:", wallet.privateKey)  
     // Generate a random initialization vector
     const iv = randomBytes(16);
 

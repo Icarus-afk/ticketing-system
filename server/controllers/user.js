@@ -45,7 +45,7 @@ export const signup = async (req, res) => {
 
       const token = jwt.sign({ email: result.email, id: result._id }, secret, { expiresIn: "1h" });
 
-      return res.status(201).json({ code: 201, success: true, message: "User successfully created", data: { result, token, wallet } });
+      return res.status(201).json({ code: 201, success: true, message: "User successfully created", data: { result, token} });
     } catch (error) {
       console.error('Error creating wallet:', error);
       throw error; // Rethrow the error to be caught by the outer catch block
