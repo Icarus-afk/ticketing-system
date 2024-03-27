@@ -11,7 +11,7 @@ const MONGO_STRING = process.env.MONGO_STRING;
 
 mongoose.connect(String(MONGO_STRING))
   .then(() => {
-    console.log(`Successfully connect}`);
+    console.log(`Successfully connect`);
   })
   .catch(error => {
     console.error('Error connecting to MongoDB:', error);
