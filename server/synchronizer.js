@@ -26,7 +26,9 @@ async function syncBalances() {
   try {
     const wallets = await Wallet.find({});
     console.log(`Found ${wallets.length} wallets`);
-    for (const wallet of wallets) {
+
+    // Create an array of promises
+    const promises = wallets.map(async (wallet) => {
       console.log(`Processing wallet ${wallet.address}`);
       const blockchainBalance = await provider.getBalance(wallet.address);
       console.log(`Blockchain balance: ${blockchainBalance}`);
@@ -42,7 +44,10 @@ async function syncBalances() {
 
         console.log('Database updated');
       }
-    }
+    });
+
+    // Wait for all promises to resolve
+    await Promise.all(promises);
   } catch (error) {
     console.error('Error during sync:', error);
   }

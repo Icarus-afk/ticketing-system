@@ -10,6 +10,7 @@ const userSchema = mongoose.Schema({
   phoneNumber: { type: String },
   isAdmin: { type: Boolean, default: false },
   userImage: { type: String },
+  isActive: {type: Boolean, default: false, required: true}
 });
 
 export default mongoose.model("User", userSchema);
